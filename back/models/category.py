@@ -12,18 +12,20 @@ class Category(BaseModel):
     name = Column('name', String(length=255), nullable=False)
     description = Column('description', String(length=255), nullable=True)
 
-    def __init__(self, name: str, description: str) -> None:
+    def __init__(self, name, description) -> None:
         self.name = name
         self.description = description
     
     @validates('name')
     def validate_name(self, key, name) -> None:
+        print('a')
         if not isinstance(name, str):
             raise TypeError("Name type must be a string")
         if not name.strip():
             raise ValueError("Name can't be empty")
         if len(name) > 100:
             raise ValueError("Name must have a maximum of 100 characters")
+        return name
     
     @validates('description')
     def validate_description(self, key, description) -> None:
@@ -33,3 +35,4 @@ class Category(BaseModel):
             raise ValueError("Description can't be empty")
         if len(description) > 255:
             raise ValueError("Description must have a maximum of 255 characters")
+        return description
