@@ -1,85 +1,69 @@
 import sys
 sys.path.append('.')
-
 from back.models.category import Category
+import pytest
 
-class TestCategory():
-    def test_category_type(self):
-        category = Category('nome', 'descrição')
-        assert isinstance(category, Category)
-        
-    def test_category_name(self):
-        name = 'name'
-        description = 'description'
-        category = Category(name, description)
-        assert category.name, name
+@pytest.mark.parametrize("name, description", [
+    ('qualquer coisa', 'Blablabla'),
+    ('open bar', 'Tananan'),
+    ('teste', 'Vacina pronta')])
+def test_category_instance(name, description):
+    category = Category(name, description)
+    assert isinstance(category, Category)
 
-    def test_category_name_none(self):
-        try:
-            category = Category(None, 'descrição')
-            raise NotImplementedError("Error not raised")
-        except Exception as error:
-            assert isinstance(error, TypeError)
-    
-    def test_category_name_int(self):
-        try:
-            category = Category(123, 'descrição')
-            raise NotImplementedError("Error not raised")
-        except Exception as error:
-            assert isinstance(error, TypeError)
-    
-    def test_category_name_emptystring(self):
-        try:
-            category = Category('', 'descrição')
-            raise NotImplementedError("Error not raised")
-        except Exception as error:
-            assert isinstance(error, ValueError)
-        
-    def test_category_name_space(self):
-        try:
-            category = Category(' ', 'descrição')
-            raise NotImplementedError("Error not raised")
-        except Exception as error:
-            assert isinstance(error, ValueError)
-        
-    def test_category_name_characterexcess(self):
-        try:
-            category = Category('nome'*100, 'descrição')
-            raise NotImplementedError("Error not raised")
-        except Exception as error:
-            assert isinstance(error, ValueError)
+@pytest.mark.parametrize("name, description", [
+    ('qualquer coisa', 'Blablabla'),
+    ('open bar', 'Tananan'),
+    ('teste', 'Vacina pronta')])
+def test_category_name(name, description):
+    category = Category(name, description)
+    assert category.name, name
 
-    def test_category_description(self):
-        name = 'name'
-        description = 'description'
-        category = Category(name, description)
-        assert category.description, description
+def test_category_name_none():
+    with pytest.raises(TypeError):
+        category = Category(None, 'descrição')
+    
+def test_category_name_int():
+    with pytest.raises(TypeError):
+        category = Category(123, 'descrição')
 
-    def test_category_description_none(self):
-        try:
-            category = Category(None, 'descrição')
-            raise NotImplementedError("Error not raised")
-        except Exception as error:
-            assert isinstance(error, TypeError)
-    
-    def test_category_description_int(self):
-        try:
-            category = Category('nome', 123)
-            raise NotImplementedError("Error not raised")
-        except Exception as error:
-            assert isinstance(error, TypeError)
-    
-    def test_category_description_space(self):
-        try:
-            category = Category('nome', ' ')
-            raise NotImplementedError("Error not raised")
-        except Exception as error:
-            assert isinstance(error, ValueError)
+def test_category_name_emptystring():
+    with pytest.raises(ValueError):
+        category = Category('', 'descrição')
         
-    def test_category_description_charactersexcess(self):
-        try:
-            category = Category('nome', 'descrição'*100)
-            raise NotImplementedError("Error not raised")
-        except Exception as error:
-            assert isinstance(error, ValueError)
+def test_category_name_space():
+    with pytest.raises(ValueError):
+        category = Category(' ', 'descrição')
+        
+def test_category_name_characterexcess():
+    with pytest.raises(ValueError):
+        category = Category('nome'*100, 'descrição')
+
+@pytest.mark.parametrize("name, description", [
+    ('qualquer coisa', 'Blablabla'),
+    ('open bar', 'Tananan'),
+    ('teste', 'Vacina pronta')])
+def test_category_description(name, description):
+    category = Category(name, description)
+    assert category.description, description
+
+def test_category_description_none():
+    with pytest.raises(TypeError):
+        category = Category(None, 'descrição')
+
+    
+def test_category_description_int():
+    with pytest.raises(TypeError):
+        category = Category('nome', 123)
+
+    
+def test_category_description_space():
+    with pytest.raises(ValueError):
+        category = Category('nome', ' ')
+
+        
+def test_category_description_characters_excess():
+    with pytest.raises(ValueError):
+        category = Category('nome', 'descrição'*100)
+
             
