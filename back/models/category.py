@@ -16,7 +16,6 @@ class Category(BaseModel):
     
     @validates('name')
     def validate_name(self, key, name) -> None:
-        print('a')
         if not isinstance(name, str):
             raise TypeError("Name type must be a string")
         if not name.strip():
