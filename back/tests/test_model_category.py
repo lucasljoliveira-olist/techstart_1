@@ -37,6 +37,6 @@ def test_category_description_space():
     with pytest.raises(ValueError):
         category = Category('teste', ' ')
 
-def test_category_name_excess():
+def test_category_description_excess():
     with pytest.raises(ValueError):
         category = Category('nome', 'descricao'*100)
