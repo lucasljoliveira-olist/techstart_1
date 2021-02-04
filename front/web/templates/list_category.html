@@ -1,0 +1,26 @@
+{% extends 'template.html' %}
+{% block title %}Listing Categories{% endblock %}
+{% block body %}
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th><button type="button" onclick="window.location.href='/category/create'">Create</button></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in items %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.description }}</td>
+                <td>
+                    <button type="button" onclick="window.location.href='/category/update/{{item.id}}'">Update</button>
+                    <button type="button" onclick="window.location.href='/category/delete/{{item.id}}'">Delete</button>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <button type="button" onclick="window.location.href='/category/create'">Create</button>
+{% endblock %}

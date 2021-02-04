@@ -1,0 +1,15 @@
+{% extends 'template.html' %}
+{% block title %}Update Category{% endblock %}
+{% block body %}
+    <form action="/category/update", method="POST" >
+        <label>ID</label>
+        <input type="text" id="id" name="id" value="{{ item.id }}", readonly>
+        </br>
+        <label>Name</label>
+        <input type="text" id="name" name="name" value="{{ item.name }}">
+        </br>
+        <label>Description</label>
+        <input type="text" id="description" name="description" value="{{ item.description }}">
+        <button type="submit">Save</button>
+    </form>
+{% endblock %}
