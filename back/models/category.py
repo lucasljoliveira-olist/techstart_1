@@ -10,9 +10,10 @@ class Category(BaseModel):
     name = Column('name', String(length=255), nullable=False)
     description = Column('description', String(length=255), nullable=True)
 
-    def __init__(self, name, description) -> None:
+    def __init__(self, name: str, description: str, id: int = None) -> None:
         self.name = name
         self.description = description
+        self.id = id
     
     @validates('name')
     def validate_name(self, key, name) -> None:
@@ -33,3 +34,7 @@ class Category(BaseModel):
         if len(description) > 255:
             raise ValueError("Description must have a maximum of 255 characters")
         return description
+
+
+    def __str__(self):
+        return f"""Name: {self.name}, Description: {self.description}"""

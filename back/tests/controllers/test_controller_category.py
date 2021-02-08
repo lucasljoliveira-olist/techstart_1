@@ -26,12 +26,12 @@ class TestCategoryController:
         assert isinstance(result, list)
 
     def test_create(self, create_controller, create_category):
-        category = create_controller.save(create_category)
+        category = create_controller.create(create_category)
         assert category.id is not None
         create_controller.delete(category)
 
     def test_update(self, create_controller, create_category):
-        category = create_controller.save(create_category)
+        category = create_controller.create(create_category)
         category.name = 'New category'
         category.description = 'New description'
         category_updated = create_controller.update(category)
@@ -43,7 +43,7 @@ class TestCategoryController:
         create_controller.delete(category)
 
     def test_delete(self, create_controller, create_category):
-        category = create_controller.save(create_category)
+        category = create_controller.create(create_category)
         create_controller.delete(category)
 
         with pytest.raises(Exception) as exc:
@@ -51,7 +51,7 @@ class TestCategoryController:
             assert exc.value == 'Object not found in the database.'
 
     def test_read_by_id(self, create_controller, create_category):
-        category = create_controller.save(create_category)
+        category = create_controller.create(create_category)
         category_read = create_controller.read_by_id(category.id)
 
         assert isinstance(category_read, Category)

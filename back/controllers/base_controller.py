@@ -5,7 +5,7 @@ class BaseController:
     def __init__(self, dao):
         self.__dao = dao
 
-    def save(self, model: BaseModel) -> None:
+    def create(self, model: BaseModel) -> None:
         model = self.__dao.save(model)
         return model
 

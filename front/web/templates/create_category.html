@@ -1,0 +1,12 @@
+{% extends 'template.html' %}
+{% block title %}Create Category{% endblock %}
+{% block body %}
+    <form action="/category", method="POST" >
+        <label>Name</label>
+        <input type="text" id="name" name="name">
+        </br>
+        <label>Description</label>
+        <input type="text" id="description" name="description">
+        <button type="submit">Save</button>
+    </form>
+{% endblock %}
